@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;600;700;800;900&display=swap");
+
+// Fonts
+$fontStack: Raleway, Helvetica, Verdana, Arial, sans-serif;
+// Calc Font size per screen
+$fontSize: calc(14px + (21 - 14) * (100vw - 412px) / (1920 - 412));
+
+//
+$bgColor: #4b394a;
+$fontColor: #eee;
+
+// Basic reset to fill out entire screen
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $fontStack;
+  font-size: $fontSize;
+  color: $fontColor;
+  background-color: $bgColor;
+}
+
+h1 {
+  text-align: center;
+  margin: 2rem 0;
+  font-size: 2.5rem;
+}
+
+.accordion {
+  width: 90%;
+  max-width: 1000px;
+  margin: 2rem auto;
+  // styles accordion-item
+  &-item {
+    background-color: #eee;
+    color: #111;
+    margin: 1rem 0;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    // styles accordion-item-header
+    &-header {
+      padding: 0.5rem 3rem 0.5rem 1rem;
+      min-height: 3.5rem;
+      line-height: 1.25rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      position: relative;
+      cursor: pointer;
+    }
+    // styles accordion-item-header::after
+    &-header::after {
+      transition: transform 250ms;
+      content: url('data:image/svg+xml;charset=UTF-8, <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="23" height="13" viewBox="0 0 23 13"><path fill-rule="evenodd" clip-rule="evenodd" d="m.54 1.653.707-.707L11.5 11.199 21.753.946l.707.707-10.96 10.96L.54 1.653Z"/></svg>');
+      font-size: 2rem;
+      position: absolute;
+      right: 1rem;
+    }
+    // styles ..-item-header if it has active class on it aswell
+    &-header.active::after {
+      transform: scaleY(-1);
+    }
+    // styles body content
+    &-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 500ms ease-in-out;
+
+      &-content {
+        padding: 1rem;
+        line-height: 1.5rem;
+        border-top: 2px solid $bgColor;
+      }
+    }
+
+    &-header.active + &-body {
+      max-height: fit-content;
+      transition: max-height 500ms;
+    }
+
+  }
+}
